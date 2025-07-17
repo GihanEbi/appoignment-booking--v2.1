@@ -1,11 +1,6 @@
 import { getToken } from '@/utils/auth-utils';
 
 const commonUrl = '/api/users';
-type params = {
-  pageNo: number;
-  pageSize: number;
-};
-type searchValue = string | undefined;
 
 type User = {
   firstName: string;

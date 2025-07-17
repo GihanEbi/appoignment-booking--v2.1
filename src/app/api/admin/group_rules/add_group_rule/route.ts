@@ -3,8 +3,6 @@ import { NextResponse } from 'next/server';
 // -------------services-----------------
 import { connectDB } from '../../../../../../lib/db';
 import RuleModel from '../../../../../../models/RuleModel';
-import { createId } from '@/services/id_generator/id-generator-service';
-import { id_codes } from '@/constants/id_code_constants';
 import { CheckUserAccess } from '@/services/auth-services/auth-service';
 import { access_levels } from '@/constants/access_constants';
 
@@ -82,7 +80,7 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: 'Error adding group rule' },
+      { success: false, message: 'Failed to add group rule', error },
       { status: 500 }
     );
   }

@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 
 // -------------services-----------------
 import { connectDB } from '../../../../../../lib/db';
-import RuleModel from '../../../../../../models/RuleModel';
 import GroupRuleModel from '../../../../../../models/GroupRuleModel';
 import { createId } from '@/services/id_generator/id-generator-service';
 import { id_codes } from '@/constants/id_code_constants';
@@ -47,27 +46,26 @@ export async function POST(req: Request) {
 
   //   --------- connect to database -----------
   await connectDB();
-  let createdObject;
 
   try {
     for await (const item of deleteList) {
-      let deletedObject = await GroupRuleModel.findOneAndDelete({
+      await GroupRuleModel.findOneAndDelete({
         groupId: groupId,
         ruleId: item,
       });
     }
 
     for await (const item of newList) {
-      let existingObj = await GroupRuleModel.findOne({
+      const existingObj = await GroupRuleModel.findOne({
         groupId: groupId,
         ruleId: item,
       });
       if (existingObj) {
         continue;
       }
-      let ID = await createId(id_codes.idCode.groupRule);
+      const ID = await createId(id_codes.idCode.groupRule);
 
-      createdObject = await GroupRuleModel.create({
+     await GroupRuleModel.create({
         ID: ID,
         groupId: groupId,
         ruleId: item,
@@ -84,7 +82,7 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: 'Error assigning group rule' },
+      { success: false, message: 'Error assigning group rule', error },
       { status: 500 }
     );
   }

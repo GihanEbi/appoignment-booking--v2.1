@@ -49,7 +49,7 @@ interface componentProps {
   // icon props can be added if needed
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
-  iconFunction?: Function;
+  // iconFunction?: Function;
 }
 
 const TextInputComponent: React.FC<componentProps> = ({
@@ -63,7 +63,7 @@ const TextInputComponent: React.FC<componentProps> = ({
   error,
   icon,
   iconPosition,
-  iconFunction,
+  // iconFunction,
 }) => {
   return (
     <div>
@@ -89,7 +89,7 @@ const TextInputComponent: React.FC<componentProps> = ({
           disabled={disabled}
           required={required}
         />
-        {icon && iconFunction && (
+        {/* {icon && iconFunction && (
           <span
             onClick={() => {
               iconFunction();
@@ -97,7 +97,7 @@ const TextInputComponent: React.FC<componentProps> = ({
           >
             {icon}
           </span>
-        )}
+        )} */}
       </div>
       {error && <p className="mt-1 text-xs text-error-500">{error}</p>}
     </div>

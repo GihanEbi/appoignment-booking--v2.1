@@ -1,5 +1,5 @@
 export const itemAvailable = (array: any[], value: any) => {
-  let item = array.find((element) => {
+  const item = array.find((element) => {
     return element === value;
   });
 

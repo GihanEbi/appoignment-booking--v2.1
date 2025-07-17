@@ -104,7 +104,7 @@ export async function POST(req: Request) {
     }
     //  --------- return when pagination values are provided ---------
     if (pageNo && pageSize) {
-      let response = {
+      const response = {
         details: userGroups[0].data,
         noOfPages: Math.ceil(
           userGroups[0].metadata.length !== 0
@@ -133,7 +133,7 @@ export async function POST(req: Request) {
     }
   } catch (error) {
     return Response.json(
-      { success: false, message: 'Error getting user groups data' },
+      { success: false, message: 'Error getting user groups data' , error },
       { status: 400 }
     );
   }

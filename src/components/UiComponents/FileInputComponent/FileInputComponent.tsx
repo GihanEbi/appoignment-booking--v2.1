@@ -34,7 +34,7 @@ interface componentProps {
   label?: string;
   placeholder?: string;
   value: string;
-  onChange: any;
+  onChange:  Function;
   disabled?: boolean;
   required?: boolean;
   error?: string;
@@ -48,11 +48,11 @@ const FileInputComponent: React.FC<componentProps> = ({
   required,
   error,
 }) => {
-  const [loading, setLoading] = React.useState(false);
+  // const [loading, setLoading] = React.useState(false);
 
   // Function to handle file upload
   //   now returning a dummy data
-  const handleFileUploadTenderDocument = async (file: any) => {
+  const handleFileUploadTenderDocument = async (event: React.ChangeEvent<HTMLInputElement>) => {
     // if (loading) {
     //   return;
     // }
@@ -78,7 +78,7 @@ const FileInputComponent: React.FC<componentProps> = ({
     // } finally {
     //   setLoading(false);
     // }
-    onChange(file); // Dummy data for now
+    onChange(event); // Dummy data for now
   };
   return (
     <div>
@@ -111,8 +111,8 @@ const FileInputComponent: React.FC<componentProps> = ({
       ) : (
         <>
           <FileInput
-            onChange={(val: any) => {
-              handleFileUploadTenderDocument(val.target.files[0]);
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              handleFileUploadTenderDocument(event);
             }}
             className={`${disabled ? 'cursor-not-allowed opacity-50' : ''} `}
             disabled={disabled}

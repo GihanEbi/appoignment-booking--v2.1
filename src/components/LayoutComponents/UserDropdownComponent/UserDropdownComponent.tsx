@@ -10,12 +10,12 @@ import {
 import { useSidebar } from '../../../context/SidebarContext';
 
 const UserDropdownComponent = () => {
-  const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
+  const { isExpanded, isMobileOpen, isHovered } = useSidebar();
   const [isOpen, setIsOpen] = useState(false);
 
-  function openDropdown() {
-    setIsOpen(true);
-  }
+  // function openDropdown() {
+  //   setIsOpen(true);
+  // }
 
   function closeDropdown() {
     setIsOpen(false);

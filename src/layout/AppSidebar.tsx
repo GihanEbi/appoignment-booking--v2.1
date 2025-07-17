@@ -5,24 +5,11 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useSidebar } from '../context/SidebarContext';
 import {
-  BoxCubeIcon,
-  CalenderIcon,
   ChevronDownIcon,
   GridIcon,
-  HorizontaLDots,
-  ListIcon,
-  PageIcon,
-  PieChartIcon,
-  PlugInIcon,
-  TableIcon,
-  UserCircleIcon,
 } from '../icons/index';
-import SidebarWidget from './SidebarWidget';
-import UserDropdown from '@/components/header/UserDropdown';
-import { Separator } from '@/components/ui/separator';
 import UserDropdownComponent from '@/components/LayoutComponents/UserDropdownComponent/UserDropdownComponent';
 import NotificationDropdownComponent from '@/components/LayoutComponents/NotificationDropdownComponent/NotificationDropdownComponent';
-import NotificationDropdown from '@/components/header/NotificationDropdown';
 import { ThemeToggleButton } from '@/components/common/ThemeToggleButton';
 
 type NavItem = {

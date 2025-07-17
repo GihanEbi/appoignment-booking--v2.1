@@ -86,7 +86,7 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: 'Error adding user group' },
+      { success: false, message: 'Error adding user group', error },
       { status: 500 }
     );
   }

@@ -105,7 +105,7 @@ export async function POST(req: Request) {
 
   try {
     // --------- unique ID generator ---------
-    let userId = await createId(id_codes.idCode.user);
+    const userId = await createId(id_codes.idCode.user);
     // --------- generate random password ---------
     const generatedPassword = result;
     const hashedPassword = await hashPassword(generatedPassword);
@@ -179,11 +179,14 @@ export async function POST(req: Request) {
 
       await sgMail.send(msg);
     } catch (error) {
-      return NextResponse.json({
-        success: false,
-        message: 'user added successfully but mail not sent',
-        status: 500,
-      });
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'user added successfully but mail not sent',
+          error,
+        },
+        { status: 201 }
+      );
     }
 
     return NextResponse.json(
@@ -196,7 +199,7 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: 'Error adding user group' },
+      { success: false, message: 'Error adding user group', error },
       { status: 500 }
     );
   }

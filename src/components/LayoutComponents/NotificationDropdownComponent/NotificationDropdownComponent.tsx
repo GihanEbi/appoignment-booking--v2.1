@@ -10,7 +10,7 @@ import {
 import { useSidebar } from '../../../context/SidebarContext';
 
 const NotificationDropdownComponent = () => {
-  const { isExpanded, isMobileOpen, isHovered, setIsHovered } = useSidebar();
+  const { isExpanded, isMobileOpen, isHovered } = useSidebar();
   const [isOpen, setIsOpen] = useState(false);
   const [notifying, setNotifying] = useState(true);
 
@@ -18,9 +18,9 @@ const NotificationDropdownComponent = () => {
     setIsOpen(!isOpen);
   }
 
-  function closeDropdown() {
-    setIsOpen(false);
-  }
+  // function closeDropdown() {
+  //   setIsOpen(false);
+  // }
 
   const handleClick = () => {
     toggleDropdown();

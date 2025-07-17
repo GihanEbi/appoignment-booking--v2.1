@@ -35,7 +35,7 @@ const RadioInputComponent: React.FC<componentProps> = ({
         name={name}
         value={value}
         checked={value !== "" ? true : false}
-        onChange={(val: any) => {
+        onChange={() => {
           onChange(value !== "" ? name : '');
         }}
         label={name}

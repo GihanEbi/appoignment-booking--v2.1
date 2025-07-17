@@ -117,7 +117,7 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     return Response.json(
-      { success: false, message: 'Error fetching user group rules' },
+      { success: false, message: 'Error fetching user group rules', error },
       { status: 400 }
     );
   }

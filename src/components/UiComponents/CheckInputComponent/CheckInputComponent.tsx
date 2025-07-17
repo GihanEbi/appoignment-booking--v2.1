@@ -31,7 +31,7 @@ interface componentProps {
   label?: string;
   name: string;
   value: boolean;
-  onChange: any;
+  onChange:  (checked: boolean) => void;
   disabled?: boolean;
   required?: boolean;
   error?: string;

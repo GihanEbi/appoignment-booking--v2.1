@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { config } from '@/config';
 import UserModel from '../../../models/UserModel';
 import { itemAvailable } from './item-available';
@@ -19,7 +19,7 @@ export const CheckUserAccess = async (
     return { success: false, message: 'Token is required', status: 401 };
   } else {
     // Validate the token
-    let isValidToken: any;
+    let isValidToken: string | JwtPayload;
     try {
       isValidToken = verifyToken(tokenString);
 
@@ -27,13 +27,19 @@ export const CheckUserAccess = async (
         return { success: false, message: 'Invalid token', status: 401 };
       }
     } catch (error) {
-      return { success: false, message: 'Invalid token', status: 401 };
+      const errorMessage = typeof error === 'object' && error !== null && 'message' in error ? (error as { message: string }).message : 'Unknown error';
+      return { success: false, message: errorMessage, status: 401 };
     }
 
     // check if the user in user table
-    let userID = isValidToken.userId;
+    let userID: string | undefined;
+    if (typeof isValidToken === 'object' && isValidToken !== null && 'userId' in isValidToken) {
+      userID = (isValidToken as JwtPayload).userId as string;
+    } else {
+      return { success: false, message: 'Invalid token payload', status: 401 };
+    }
 
-    let accessComponent = await UserModel.aggregate([
+    const accessComponent = await UserModel.aggregate([
       {
         $match: {
           $and: [{ ID: userID }, { isActive: true }],
