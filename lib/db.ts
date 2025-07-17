@@ -4,7 +4,7 @@ const MONGODB_URI = process.env.MONGODB_URI!;
 
 if (!MONGODB_URI) throw new Error("Missing MONGODB_URI");
 
-const cached = (global as any).mongoose || { conn: null, promise: null };
+let cached = (global as any).mongoose || { conn: null, promise: null };
 
 export async function connectDB() {
   
@@ -12,7 +12,7 @@ export async function connectDB() {
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(MONGODB_URI, {
-      dbName: 'MEPA_dev',
+      dbName: 'n8n-appointment-booking',
     }).then((mongoose) => mongoose);
   }
 
